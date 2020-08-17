@@ -329,10 +329,20 @@
 
     <div style="margin: 10px" *ngFor="let item of items">
       <a href="{{ item.url }}">
-        <img *ngIf="item.isImg" src="{{ item.url }}" width="400" />
-        <video *ngIf="item.isMp4" width="400">
-          <source src="{{ item.url }}" type="video/mp4" />
-        </video>
+        <div>
+          <img *ngIf="item.isImg" src="{{ item.url }}" width="500" />
+          <video *ngIf="item.isMp4" width="500">
+            <source src="{{ item.url }}" type="video/mp4" />
+          </video>
+        </div>
+
+        <div>
+          <label>Filename: </label><span>{{ item.filename }}</span>
+        </div>
+
+        <div>
+          <label>Uploaded: </label><span>{{ item.date }}</span>
+        </div>
       </a>
     </div>
   </div>
