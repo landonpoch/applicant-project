@@ -8,6 +8,8 @@ Notes / excuses :)
  - I looked at Laravel briefly and got it running on my machine but opted to stick with something more familiar due to time constraints
  - I haven't created a recorded demo yet but can do so if necessary after submission
 
+[Video link](https://drive.google.com/file/d/1ZbfIe5G6eG1Ph0KcpLdF2r-tnkC5bQHq/view?usp=sharing)
+
 Instructions:
  - Clone this repo
  - Install node (I was using v14.8.0)
