@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
-import { AppService } from './app.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { AppService } from './app.service';
 })
 @Injectable()
 export class AppComponent {
-  constructor(private appService: AppService) { }
+  constructor(private http: HttpClient) { }
   title = 'applicant-project';
   items = [];
 
@@ -18,7 +18,7 @@ export class AppComponent {
   }
 
   showUploads() {
-    this.appService.getUploads()
+    this.http.get('http://localhost:3000/')
       .subscribe((data: string[]) => this.items = data.map(this.mapUpload));
   }
 

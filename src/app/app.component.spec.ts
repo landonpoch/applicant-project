@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -7,6 +8,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [HttpClientTestingModule],
     }).compileComponents();
   }));
 
@@ -22,10 +24,14 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('applicant-project');
   });
 
-  it('should render title', () => {
+  it('should map upload details', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('applicant-project app is running!');
-  });
+    const app = fixture.componentInstance;
+    const mapped = app.mapUpload('1597654756778-file.jpg');
+    expect(mapped.isImg).toBeTrue();
+    expect(mapped.isMp4).toBeFalse();
+    expect(mapped.filename).toEqual('file.jpg');
+    expect(mapped.url).toEqual('http://localhost:3000/file/1597654756778-file.jpg');
+    expect(mapped.fullname).toEqual('1597654756778-file.jpg');
+  })
 });
