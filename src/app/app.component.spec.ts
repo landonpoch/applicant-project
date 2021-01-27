@@ -12,9 +12,10 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it('should create and init the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
+    app.ngOnInit();
     expect(app).toBeTruthy();
   });
 
@@ -27,11 +28,20 @@ describe('AppComponent', () => {
   it('should map upload details', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    const mapped = app.mapUpload('1597654756778-file.jpg');
-    expect(mapped.isImg).toBeTrue();
-    expect(mapped.isMp4).toBeFalse();
-    expect(mapped.filename).toEqual('file.jpg');
-    expect(mapped.url).toEqual('http://localhost:3000/file/1597654756778-file.jpg');
-    expect(mapped.fullname).toEqual('1597654756778-file.jpg');
-  })
+    const LocalUrlRoot = 'http://localhost:3000/file/';
+    const filename1 = '1611728162369-img1.jpg';
+    const filename2 = '1611728162370-img2.jpg';
+    const resp = app.mapUpload([filename1, filename2]);
+    const [item1, item2] = resp;
+    expect(item1.isImg).toBeTrue();
+    expect(item1.isMp4).toBeFalse();
+    expect(item1.filename).toEqual('img1.jpg');
+    expect(item1.url).toEqual(`${LocalUrlRoot}${filename1}`);
+    expect(item1.fullname).toEqual(filename1);
+    expect(item2.isImg).toBeTrue();
+    expect(item2.isMp4).toBeFalse();
+    expect(item2.filename).toEqual('img2.jpg');
+    expect(item2.url).toEqual(`${LocalUrlRoot}${filename2}`);
+    expect(item2.fullname).toEqual(filename2);
+  });
 });

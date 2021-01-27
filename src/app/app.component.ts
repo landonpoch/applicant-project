@@ -19,20 +19,23 @@ export class AppComponent {
 
   showUploads() {
     this.http.get('http://localhost:3000/')
-      .subscribe((data: string[]) => this.items = data.map(this.mapUpload));
+      .subscribe(this.mapUpload);
   }
 
-  mapUpload(upload) {
-    const filename = upload.split('-')[1];
-    const isImg = filename.split('.')[1].toUpperCase() === 'jpg'.toUpperCase();
-    const isMp4 = filename.split('.')[1].toUpperCase() === 'mp4'.toUpperCase();
-    return {
-      fullname: upload,
-      date: new Date(Number(upload.split('-')[0])),
-      url: `http://localhost:3000/file/${upload}`,
-      filename,
-      isImg,
-      isMp4
-    };
+  mapUpload = (data: string[]) => {
+    return this.items = data.map(item => {
+      const filename = item.split('-')[1];
+      const isImg = filename.split('.')[1].toUpperCase() === 'jpg'.toUpperCase();
+      const isMp4 = filename.split('.')[1].toUpperCase() === 'mp4'.toUpperCase();
+      return {
+        fullname: item,
+        date: new Date(Number(item.split('-')[0])),
+        url: `http://localhost:3000/file/${item}`,
+        filename,
+        isImg,
+        isMp4
+      };
+    });
   }
+    
 }
